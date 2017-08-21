@@ -13,9 +13,9 @@ namespace SpatialRPGServer.Controllers
     {
         // GET api/server
         [HttpGet]
-        public string Get()
+        public ServerInfo Get()
         {
-            return ServerInfo.toJson();
+            return ServerInfo.Instance;
         }
     }
 }

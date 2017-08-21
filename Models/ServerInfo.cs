@@ -6,18 +6,26 @@ using Newtonsoft.Json;
 
 namespace SpatialRPGServer.Models
 {
-    public static class ServerInfo
+    public class ServerInfo
     {
+        private static readonly ServerInfo instance = new ServerInfo();
+
+        // Server values
+        [JsonProperty]
         public const double ServerVersion = 0.1;
 
-        public static string toJson()
-        {
-            var resp = new ServerInfoResponse()
-            {
-                version = ServerVersion
-            };
 
-            return JsonConvert.SerializeObject(resp);
+        static ServerInfo()
+        {
+
+        }
+
+        public static ServerInfo Instance
+        {
+            get
+            {
+                return instance;
+            }
         }
     }
 
