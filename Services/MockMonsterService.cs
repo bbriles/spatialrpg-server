@@ -6,12 +6,12 @@ using SpatialRPGServer.Models;
 
 namespace SpatialRPGServer.Services
 {
-    public class MonsterService
+    public class MockMonsterService : IMonsterService
     {
         protected List<MonsterKind> kinds;
         protected List<Monster> monsters;
 
-        public MonsterService()
+        public MockMonsterService()
         {
             CreateMockData();
         }

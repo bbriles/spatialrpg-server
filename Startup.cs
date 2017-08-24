@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SpatialRPGServer.Services;
 
 namespace SpatialRPGServer
 {
@@ -29,6 +30,14 @@ namespace SpatialRPGServer
         {
             // Add framework services.
             services.AddMvc();
+
+            // Add application services
+            
+            // Mock Services (for testing)
+            services.AddSingleton<IUserService>(new MockUserService());
+            services.AddSingleton<IMonsterService>(new MockMonsterService());
+            // Real Services
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SpatialRPGServer.Services
 {
-    public class PartyService
+    public class MockPartyService
     {
     }
 }

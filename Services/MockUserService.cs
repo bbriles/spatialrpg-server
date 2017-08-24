@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using SpatialRPGServer.Models;
 
-namespace SpatialRPGServer
+namespace SpatialRPGServer.Services
 {
-    public class UserService
+    public class MockUserService : IUserService
     {
         protected List<User> users;
 
-        public UserService()
+        public MockUserService()
         {
             CreateMockData();
         }
@@ -20,6 +20,7 @@ namespace SpatialRPGServer
             users = new List<User>();
             users.Add(new User() { Id = 1, Username = "testguy" });
             users.Add(new User() { Id = 2, Username = "testgal" });
+            users.Add(new User() { Id = 3, Username="frank" });
         }
 
         public User GetUser(int id)
