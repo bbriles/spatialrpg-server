@@ -28,9 +28,6 @@ Update the user's information. User token must match user you are updating.
 `POST /api/user/position/:id`
 Update the user's position.  User token must match user you are updating.
 
-`GET /api/user/monsters/:userid`
-Returns a list of all the monsters owned by that user. User token must match user id provided.
-
 `GET /api/party/:userid`
 Get the monsters in the user's party. User token must match user id provided.
 
@@ -48,6 +45,12 @@ Get information on a specific encounter.
 
 `POST /api/encounter/action/:id`
 User action during an encounter. Action information expected in body.
+
+`GET /api/monster`
+Returns list of all possible kinds of monsters.
+
+`GET /api/monster/user/:userid`
+Returns a list of all the monsters owned by that user. User token must match user id provided.
 
 `GET /api/monster/:id`
 Get information on a specific monster. Monster must be owned by user matching token provided.

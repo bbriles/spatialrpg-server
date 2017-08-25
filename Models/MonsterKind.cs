@@ -15,9 +15,13 @@ namespace SpatialRPGServer.Models
 
     public enum MonsterType
     {
-        Humanoid,
         Beast,
-        Construct
+        Construct,
+        Dragon,
+        Spirit,
+        Humanoid,
+        Insect,
+        Monster
     }
 
     public enum MonsterElement
@@ -25,6 +29,9 @@ namespace SpatialRPGServer.Models
         Fire,
         Water,
         Earth,
-        Air
+        Air,
+        Fae,
+        Iron,
+        Nature
     }
 }

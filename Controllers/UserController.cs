@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpatialRPGServer.ViewModels;
+using SpatialRPGServer.Services;
 
 namespace SpatialRPGServer.Controllers
 {
@@ -13,10 +14,23 @@ namespace SpatialRPGServer.Controllers
 
     public class UserController : Controller
     {
+        private IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { message = "feature not yet implemented" });
+            return Json(_userService.GetUsers());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            return Json(_userService.GetUser(id));
         }
 
         // POST api/user/authenticate
@@ -32,7 +46,7 @@ namespace SpatialRPGServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                return new CreatedAtActionResult("Get","User",null,  new { id = user.Id });
+                return new CreatedAtActionResult("Get", "User", null, new { id = user.Id });
             }
             else
             {
