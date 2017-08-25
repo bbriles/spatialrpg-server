@@ -36,6 +36,10 @@ namespace SpatialRPGServer
             // Mock Services (for testing)
             services.AddSingleton<IUserService>(new MockUserService());
             services.AddSingleton<IMonsterService>(new MockMonsterService());
+            var battleService = new MockBattleService();
+            services.AddSingleton<IBattleService>(battleService);
+            services.AddSingleton<IEncounterService>(new MockEncounterService(battleService));
+
             // Real Services
 
         }

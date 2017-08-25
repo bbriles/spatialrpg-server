@@ -7,13 +7,32 @@ namespace SpatialRPGServer.Models
 {
     public class Encounter
     {
-        protected User[] users;
-        protected Monster[] monsters;
+        public int Id { get; }
+        private static int _nextId = 0;
+        protected List<int> userIds;
+        protected List<Monster> monsters;
+
+        public Encounter()
+        {
+            Id = System.Threading.Interlocked.Increment(ref _nextId);
+
+            userIds = new List<int>();
+        }
+
+        public bool Join(int userId)
+        {
+            if(!HasUserJoined(userId))
+            {
+                userIds.Add(userId);
+                return true;
+            }
+            return false;
+        }
 
         // Checks with a user (specified by Id) is involved in this encounter
-        public bool IsUserEncounter(int userId)
+        public bool HasUserJoined(int userId)
         {
-            return true;
+            return userIds.Contains(userId);
         }
     }
 }
