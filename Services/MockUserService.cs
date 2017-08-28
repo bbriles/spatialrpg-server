@@ -8,19 +8,30 @@ namespace SpatialRPGServer.Services
 {
     public class MockUserService : IUserService
     {
+        private IMonsterService _monsterService;
         protected List<User> users;
 
-        public MockUserService()
+        public MockUserService(IMonsterService monsterService)
         {
+            _monsterService = monsterService;
             CreateMockData();
         }
 
         protected void CreateMockData()
         {
             users = new List<User>();
-            users.Add(new User() { Id = 1, Username = "testguy" });
-            users.Add(new User() { Id = 2, Username = "testgal" });
-            users.Add(new User() { Id = 3, Username="frank" });
+            var user = new User() { Id = 1, Username = "testguy" };
+            user.Party.AddMonster(_monsterService.GetMonster(1));
+            user.Party.AddMonster(_monsterService.GetMonster(2));
+            user.Party.AddMonster(_monsterService.GetMonster(3));
+            users.Add(user);
+            user = new User() { Id = 2, Username = "testgal" };
+            user.Party.AddMonster(_monsterService.GetMonster(4));
+            users.Add(user);
+            user = new User() { Id = 3, Username = "frank" };
+            user.Party.AddMonster(_monsterService.GetMonster(7));
+            user.Party.AddMonster(_monsterService.GetMonster(8));
+            users.Add(user);
         }
 
         public User GetUser(int id)

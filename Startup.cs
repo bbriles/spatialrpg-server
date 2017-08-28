@@ -32,10 +32,11 @@ namespace SpatialRPGServer
             services.AddMvc();
 
             // Add application services
-            
+
             // Mock Services (for testing)
-            services.AddSingleton<IUserService>(new MockUserService());
-            services.AddSingleton<IMonsterService>(new MockMonsterService());
+            var monsterService = new MockMonsterService();
+            services.AddSingleton<IMonsterService>(monsterService);
+            services.AddSingleton<IUserService>(new MockUserService(monsterService));
             var battleService = new MockBattleService();
             services.AddSingleton<IBattleService>(battleService);
             services.AddSingleton<IEncounterService>(new MockEncounterService(battleService));

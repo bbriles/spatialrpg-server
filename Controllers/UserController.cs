@@ -33,6 +33,17 @@ namespace SpatialRPGServer.Controllers
             return Json(_userService.GetUser(id));
         }
 
+        [HttpGet("{id}/party")]
+        public IActionResult GetParty(int id)
+        {
+            var user = _userService.GetUser(id);
+            if(user != null)
+            {
+                return Json(user.Party);
+            }
+            return BadRequest();
+        }
+
         // POST api/user/authenticate
         [HttpPost("authenticate")]
         public IActionResult AuthenticateUser(UserViewModel user)
