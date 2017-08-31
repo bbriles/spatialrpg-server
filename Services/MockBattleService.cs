@@ -26,6 +26,8 @@ namespace SpatialRPGServer.Services
 
             battles.Add(battle);
 
+            user.InBattle = true;
+
             return battle.Id;
         }
     }

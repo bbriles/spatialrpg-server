@@ -1,5 +1,6 @@
 {
-  "name": "asp.net",
+  "name": "spatialrpg-server",
+  "directory": "wwwroot/lib",
   "private": true,
   "dependencies": {
     "bootstrap": "v4.0.0-beta"

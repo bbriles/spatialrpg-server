@@ -30,6 +30,13 @@ namespace SpatialRPGServer
         {
             // Add framework services.
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
 
             // Add application services
 
@@ -52,6 +59,7 @@ namespace SpatialRPGServer
             loggerFactory.AddDebug();
 
             app.UseStaticFiles();
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
     }

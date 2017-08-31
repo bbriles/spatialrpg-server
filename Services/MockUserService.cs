@@ -20,15 +20,15 @@ namespace SpatialRPGServer.Services
         protected void CreateMockData()
         {
             users = new List<User>();
-            var user = new User() { Id = 1, Username = "testguy" };
+            var user = new User() { Id = 1, Username = "testguy", CompletedIntro = true };
             user.Party.AddMonster(_monsterService.GetMonster(1));
             user.Party.AddMonster(_monsterService.GetMonster(2));
             user.Party.AddMonster(_monsterService.GetMonster(3));
             users.Add(user);
-            user = new User() { Id = 2, Username = "testgal" };
+            user = new User() { Id = 2, Username = "testgal", CompletedIntro = true };
             user.Party.AddMonster(_monsterService.GetMonster(4));
             users.Add(user);
-            user = new User() { Id = 3, Username = "frank" };
+            user = new User() { Id = 3, Username = "frank", CompletedIntro = true };
             user.Party.AddMonster(_monsterService.GetMonster(7));
             user.Party.AddMonster(_monsterService.GetMonster(8));
             users.Add(user);
