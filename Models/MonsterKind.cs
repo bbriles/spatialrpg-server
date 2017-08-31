@@ -9,19 +9,19 @@ namespace SpatialRPGServer.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public MonsterType Type { get; set; }
+        public string Type { get; set; }
         public MonsterElement Element { get; set; }
     }
 
-    public enum MonsterType
+    public struct MonsterType
     {
-        Beast,
-        Construct,
-        Dragon,
-        Spirit,
-        Humanoid,
-        Insect,
-        Monster
+        public const string Beast = "Beast";
+        public const string Construct = "Construct";
+        public const string Dragon = "Dragon";
+        public const string Spirit = "Spirit";
+        public const string Humanoid = "Humanoid";
+        public const string Insect = "Insect";
+        public const string Monster = "Monster";
     }
 
     public enum MonsterElement
