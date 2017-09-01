@@ -10,7 +10,7 @@ namespace SpatialRPGServer.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public MonsterElement Element { get; set; }
+        public string Element { get; set; }
     }
 
     public struct MonsterType
@@ -24,14 +24,14 @@ namespace SpatialRPGServer.Models
         public const string Monster = "Monster";
     }
 
-    public enum MonsterElement
+    public struct MonsterElement
     {
-        Fire,
-        Water,
-        Earth,
-        Air,
-        Fae,
-        Iron,
-        Nature
+        public const string Fire = "Fire";
+        public const string Water = "Water";
+        public const string Earth = "Earth";
+        public const string Air = "Air";
+        public const string Fae = "Fae";
+        public const string Iron = "Iron";
+        public const string Nature = "Nature";
     }
 }
