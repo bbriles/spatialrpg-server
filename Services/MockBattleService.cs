@@ -15,6 +15,11 @@ namespace SpatialRPGServer.Services
             battles = new List<Battle>();
         }
 
+        public Battle GetBattleByUser(int userId)
+        {
+            return battles.FirstOrDefault(b => b.User.Id == userId);
+        }
+
         public IEnumerable<Battle> GetBattles()
         {
             return (IEnumerable<Battle>)battles;
@@ -26,7 +31,7 @@ namespace SpatialRPGServer.Services
 
             battles.Add(battle);
 
-            user.InBattle = true;
+            user.SetBattle(battle);
 
             return battle.Id;
         }
