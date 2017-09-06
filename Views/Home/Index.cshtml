@@ -38,7 +38,8 @@
     <thead>
         <tr>
             <td>Id</td>
-            <td></td>
+            <td>Monsters</td>
+            <td>Users Joined</td>
         </tr>
     </thead>
     <tbody>
@@ -46,7 +47,8 @@
         {
             <tr>
                 <td>@encounter.Id</td>
-                <td></td>
+                <td>@encounter.GetMonstersString()</td>
+                <td>@encounter.GetTotalUsers()</td>
             </tr>
         }
     </tbody>

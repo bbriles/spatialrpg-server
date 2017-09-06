@@ -15,8 +15,9 @@ namespace SpatialRPGServer.Models
         public Battle(Encounter encounter, User user)
         {
             Id = System.Threading.Interlocked.Increment(ref _nextId);
-            
 
+            User = user;
+            Enemies = new List<Monster>(encounter.Monsters);
         }
     }
 }

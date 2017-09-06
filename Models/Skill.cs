@@ -9,16 +9,16 @@ namespace SpatialRPGServer.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public char Operator { get; set; }
+        public string Description { get; set; }
+        public Operator Operator { get; set; }
+        public string RelatedStat { get; set; }
         public string AffectedStat { get; set; }
         public double Amount { get; set; }
     }
 
-    public struct Operator
+    public enum Operator
     {
-        public const string Attack = "Attack";
-        public const string Buff = "Buff";
-        public const string Debuff = "Debuff";
-
+        Add = 0,
+        Multiply = 1
     }
 }

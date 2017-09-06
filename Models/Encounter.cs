@@ -10,13 +10,14 @@ namespace SpatialRPGServer.Models
         public int Id { get; }
         private static int _nextId = 0;
         protected List<int> userIds;
-        protected List<Monster> monsters;
+        public List<Monster> Monsters;
 
-        public Encounter()
+        public Encounter(List<Monster> monsters)
         {
             Id = System.Threading.Interlocked.Increment(ref _nextId);
 
             userIds = new List<int>();
+            Monsters = new List<Monster>(monsters);
         }
 
         public bool Join(int userId)
@@ -33,6 +34,25 @@ namespace SpatialRPGServer.Models
         public bool HasUserJoined(int userId)
         {
             return userIds.Contains(userId);
+        }
+
+        public string GetMonstersString()
+        {
+            var str = "";
+
+            for(var i = 0; i < Monsters.Count; i++)
+            {
+                if (i > 0)
+                    str += ", ";
+                str += Monsters[i].Kind.Name;
+            }
+
+            return str;
+        }
+
+        public int GetTotalUsers()
+        {
+            return userIds.Count;
         }
     }
 }

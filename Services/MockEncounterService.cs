@@ -8,11 +8,13 @@ namespace SpatialRPGServer.Services
 {
     public class MockEncounterService : IEncounterService
     {
+        private IMonsterService _monsterService;
         private IBattleService _battleService;
         protected List<Encounter> encounters;
 
-        public MockEncounterService(IBattleService battleService)
+        public MockEncounterService(IMonsterService monsterService, IBattleService battleService)
         {
+            _monsterService = monsterService;
             _battleService = battleService;
             CreateMockData();
         }
@@ -34,9 +36,19 @@ namespace SpatialRPGServer.Services
 
         public void CreateRandomEncounter()
         {
-            var encounter = new Encounter();
+            var encounter = new Encounter(GetEncounterMonsters());
 
             encounters.Add(encounter);
+        }
+
+        protected List<Monster> GetEncounterMonsters()
+        {
+            var monsters = new List<Monster>();
+            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(3) });
+            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(2) });
+            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(5) });
+
+            return monsters;
         }
 
         // returns the ID of the battle created if successful, otherwise -1
