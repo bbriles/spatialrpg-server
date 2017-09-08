@@ -23,7 +23,7 @@ namespace SpatialRPGServer.Models
         }
         public int Id { get; set; }
         public int UserId { get; set; }
-        protected Stats stats;
+        public Stats stats;
 
         public Monster()
         {

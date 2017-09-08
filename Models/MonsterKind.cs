@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SpatialRPGServer.Models
 {
@@ -11,6 +12,7 @@ namespace SpatialRPGServer.Models
         public string Name { get; set; }
         public string Type { get; set; }
         public string Element { get; set; }
+        [JsonIgnore]
         public Dictionary<string, int> BaseStats;
     }
 

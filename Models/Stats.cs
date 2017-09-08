@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using SpatialRPGServer.Converters;
 
 namespace SpatialRPGServer.Models
 {
+    [JsonConverter(typeof(StatsJsonConverter))]
     public class Stats
     {
         protected Dictionary<string, int> stats;

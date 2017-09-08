@@ -15,6 +15,7 @@ namespace SpatialRPGServer.Models
         public double LocationX { get; set; }
         public double LocationY { get; set; }
         public bool InBattle { get; protected set; } // is the user currently in battle
+        [JsonIgnore]
         public Battle Battle { get; protected set; } // the battle the user is currently in (null if not in battle)
         public bool CompletedIntro { get; set; } // has user completed the introduction, chosen a start monster, etc...
 
