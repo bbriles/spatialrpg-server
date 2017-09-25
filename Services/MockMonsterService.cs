@@ -19,16 +19,86 @@ namespace SpatialRPGServer.Services
         protected void CreateMockData()
         {
             kinds = new List<MonsterKind>();
-            kinds.Add(new MonsterKind() { Id = 1, Element = MonsterElement.Fire, Type = MonsterType.Construct, Name = "Magma Golem" });
-            kinds.Add(new MonsterKind() { Id = 2, Element = MonsterElement.Iron, Type = MonsterType.Humanoid, Name = "Dwarf" });
-            kinds.Add(new MonsterKind() { Id = 3, Element = MonsterElement.Water, Type = MonsterType.Dragon, Name = "Leviathan" });
-            kinds.Add(new MonsterKind() { Id = 4, Element = MonsterElement.Nature, Type = MonsterType.Humanoid, Name = "Sasquatch" });
-            kinds.Add(new MonsterKind() { Id = 5, Element = MonsterElement.Water, Type = MonsterType.Spirit, Name = "Undine" });
-            kinds.Add(new MonsterKind() { Id = 6, Element = MonsterElement.Air, Type = MonsterType.Beast, Name = "Griffin" });
-            kinds.Add(new MonsterKind() { Id = 7, Element = MonsterElement.Fae, Type = MonsterType.Humanoid, Name = "Changeling" });
-            kinds.Add(new MonsterKind() { Id = 8, Element = MonsterElement.Iron, Type = MonsterType.Construct, Name = "Living Armor" });
-            kinds.Add(new MonsterKind() { Id = 9, Element = MonsterElement.Fire, Type = MonsterType.Insect, Name = "Giant Fire Ant" });
-            kinds.Add(new MonsterKind() { Id = 10, Element = MonsterElement.Fae, Type = MonsterType.Monster, Name = "Ogre" });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 1,
+                Element = MonsterElement.Fire,
+                Type = MonsterType.Construct,
+                Name = "Magma Golem",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 2,
+                Element = MonsterElement.Iron,
+                Type = MonsterType.Humanoid,
+                Name = "Dwarf",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 3,
+                Element = MonsterElement.Water,
+                Type = MonsterType.Dragon,
+                Name = "Leviathan",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 4,
+                Element = MonsterElement.Nature,
+                Type = MonsterType.Humanoid,
+                Name = "Sasquatch",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 5,
+                Element = MonsterElement.Water,
+                Type = MonsterType.Spirit,
+                Name = "Undine",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 6,
+                Element = MonsterElement.Air,
+                Type = MonsterType.Beast,
+                Name = "Griffin",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 7,
+                Element = MonsterElement.Fae,
+                Type = MonsterType.Humanoid,
+                Name = "Changeling",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 8,
+                Element = MonsterElement.Iron,
+                Type = MonsterType.Construct,
+                Name = "Living Armor",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 9,
+                Element = MonsterElement.Fire,
+                Type = MonsterType.Insect,
+                Name = "Giant Fire Ant",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
+            kinds.Add(new MonsterKind()
+            {
+                Id = 10,
+                Element = MonsterElement.Fae,
+                Type = MonsterType.Monster,
+                Name = "Ogre",
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+            });
 
             monsters = new List<Monster>();
             monsters.Add(new Monster() { Id = 1, Kind = kinds[3], UserId = 1 });
