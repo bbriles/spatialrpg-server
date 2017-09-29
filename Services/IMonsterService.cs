@@ -5,8 +5,8 @@ namespace SpatialRPGServer.Services
 {
     public interface IMonsterService
     {
-        MonsterKind GetMonsterKind(int id);
-        IEnumerable<MonsterKind> GetMonsterKinds();
+        MonsterType GetMonsterKind(int id);
+        IEnumerable<MonsterType> GetMonsterKinds();
         IEnumerable<Monster> GetUserMonsters(int userId);
         Monster GetMonster(int id);
     }

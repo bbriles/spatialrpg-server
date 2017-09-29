@@ -8,22 +8,22 @@ namespace SpatialRPGServer.Models
 {
     public class Monster
     {
-        private MonsterKind _kind;
-        public MonsterKind Kind
+        private MonsterType _type;
+        public MonsterType Type
         {
             get
             {
-                return _kind;
+                return _type;
             }
             set
             {
-                _kind = value;
-                stats = new Stats(_kind.BaseStats);
+                _type = value;
+                Stats = new Stats(_type.BaseStats);
             }
         }
         public int Id { get; set; }
         public int UserId { get; set; }
-        public Stats stats;
+        public Stats Stats { get; set; }
 
         public Monster()
         {

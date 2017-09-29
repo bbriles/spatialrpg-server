@@ -10,46 +10,80 @@ namespace SpatialRPGServer.Models
     [JsonConverter(typeof(StatsJsonConverter))]
     public class Stats
     {
-        protected Dictionary<string, int> stats;
+        public int Level { get; set; }
+        protected Dictionary<string, int> baseStats;
+        protected Dictionary<string, int> individualStats;
 
-        public Stats(Dictionary<string, int> initStats)
+        public Stats(Dictionary<string, int> typeStats)
         {
-            if (initStats != null)
+            baseStats = typeStats;
+
+            // TODO: Individual Values
+            GenerateIndividualStats();
+
+            // TODO: Make Level not always a default value
+            Level = 10;
+
+            // TODO: Fix this to work with loading monsters not at full health
+            individualStats[Stat.HpCurrent] = GetStat(Stat.HpMax);
+        }
+
+        public int GetStat(string stat)
+        {
+            var statValue = 0;
+
+            // HP Current is a special case
+            if (stat == Stat.HpCurrent)
             {
-                stats = new Dictionary<string, int>(initStats);
+                statValue = GetStatOrDefault(stat, individualStats);
+            }
+            else if (stat == Stat.RecruitRate) // Recruit Rate is also a special case
+            {
+                statValue = GetStatOrDefault(stat, baseStats);
             }
             else
             {
-                stats = new Dictionary<string, int>();
+                var baseVal = GetStatOrDefault(stat, baseStats);
+                var individualVal = GetStatOrDefault(stat, individualStats);
+
+                // HP Max has different formula than everything else
+                if (stat == Stat.HpMax)
+                {
+                    statValue = (2 * baseVal + individualVal) * Level / 100 + Level + 10;
+                }
+                else
+                {
+                    statValue = (2 * baseVal + individualVal) * Level / 100 + 5;
+                }
+
             }
-            SetDefaultStats();
-        }
 
-        protected void SetDefaultStats()
-        {
-            if (!stats.ContainsKey(Stat.HpMax)) stats[Stat.HpMax] = 0;
-            stats.Add(Stat.HpCurrent, stats[Stat.HpMax]);
-            if (!stats.ContainsKey(Stat.PhysicalAttack)) stats[Stat.PhysicalAttack] = 0;
-            if (!stats.ContainsKey(Stat.MagicAttack)) stats[Stat.MagicAttack] = 0;
-            if (!stats.ContainsKey(Stat.PhysicalDefense)) stats[Stat.PhysicalDefense] = 0;
-            if (!stats.ContainsKey(Stat.MagicDefense)) stats[Stat.MagicDefense] = 0;
-            if (!stats.ContainsKey(Stat.Speed)) stats[Stat.Speed] = 0;
-            if (!stats.ContainsKey(Stat.RecruitRate)) stats[Stat.RecruitRate] = 0;
-        }
-
-        public int GetStat(string name)
-        {
             // apply modifiers to value returned
 
+
+            return statValue;
+        }
+
+        private void GenerateIndividualStats()
+        {
+            individualStats = new Dictionary<string, int>() {
+                { Stat.HpMax, 0 }, { Stat.PhysicalAttack, 0 }, { Stat.PhysicalDefense, 0 },
+                { Stat.MagicAttack, 0 }, {Stat.MagicDefense, 0}, {Stat.Speed, 0}
+            };
+        }
+
+        private int GetStatOrDefault(string stat, Dictionary<string, int> statDict)
+        {
             try
             {
-                return stats[name];
+                return statDict[stat];
             }
             catch (KeyNotFoundException)
             {
                 return 0;
             }
         }
+
     }
 
     public struct Stat

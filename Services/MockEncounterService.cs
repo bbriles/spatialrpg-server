@@ -44,9 +44,9 @@ namespace SpatialRPGServer.Services
         protected List<Monster> GetEncounterMonsters()
         {
             var monsters = new List<Monster>();
-            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(3) });
-            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(2) });
-            monsters.Add(new Monster() { Kind = _monsterService.GetMonsterKind(5) });
+            monsters.Add(new Monster() { Type = _monsterService.GetMonsterKind(3) });
+            monsters.Add(new Monster() { Type = _monsterService.GetMonsterKind(2) });
+            monsters.Add(new Monster() { Type = _monsterService.GetMonsterKind(5) });
 
             return monsters;
         }

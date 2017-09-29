@@ -48,7 +48,7 @@ namespace SpatialRPGServer.Models
             {
                 if (i > 0)
                     str += ", ";
-                str += Monsters[i].Kind.Name;
+                str += Monsters[i].Type.Name;
             }
 
             return str;

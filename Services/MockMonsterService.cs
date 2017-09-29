@@ -8,7 +8,7 @@ namespace SpatialRPGServer.Services
 {
     public class MockMonsterService : IMonsterService
     {
-        protected List<MonsterKind> kinds;
+        protected List<MonsterType> types;
         protected List<Monster> monsters;
 
         public MockMonsterService()
@@ -18,107 +18,158 @@ namespace SpatialRPGServer.Services
 
         protected void CreateMockData()
         {
-            kinds = new List<MonsterKind>();
-            kinds.Add(new MonsterKind()
+            types = new List<MonsterType>();
+            types.Add(new MonsterType()
             {
                 Id = 1,
                 Element = MonsterElement.Fire,
-                Type = MonsterType.Construct,
+                Class = MonsterClass.Construct,
                 Name = "Magma Golem",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 1, Name = "Burninate", Description = "Burninate the countryside", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 2, Name = "Flame On", Description = "Increase attack power", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack }
+            },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 39 }, { Stat.PhysicalAttack, 52 }, { Stat.PhysicalDefense, 43 },
+                    { Stat.MagicAttack, 60 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 65 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 2,
                 Element = MonsterElement.Iron,
-                Type = MonsterType.Humanoid,
+                Class = MonsterClass.Humanoid,
                 Name = "Dwarf",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 3, Name = "Axe Attack", Description = "Attack with axe", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 4, Name = "Natural Sprinter", Description = "Dwarves are very dangerous over short distances", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
+                    { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 3,
                 Element = MonsterElement.Water,
-                Type = MonsterType.Dragon,
+                Class = MonsterClass.Dragon,
                 Name = "Leviathan",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 5, Name = "Water Blast", Description = "Attack with a blast of water", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 6, Name = "Shroud of Mist", Description = "Hide yourself in cover of mist", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 44 }, { Stat.PhysicalAttack, 48 }, { Stat.PhysicalDefense, 65 },
+                    { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 64 }, { Stat.Speed, 43 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 4,
                 Element = MonsterElement.Nature,
-                Type = MonsterType.Humanoid,
+                Class = MonsterClass.Humanoid,
                 Name = "Sasquatch",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 7, Name = "Crushing blow", Description = "Attack with great power", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 8, Name = "Forest Camoflage", Description = "Hide yourself", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 63 }, { Stat.PhysicalAttack, 60 }, { Stat.PhysicalDefense, 55 },
+                    { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 71 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 5,
                 Element = MonsterElement.Water,
-                Type = MonsterType.Spirit,
+                Class = MonsterClass.Spirit,
                 Name = "Undine",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 9, Name = "Flood", Description = "Lots of water", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 10, Name = "Big Splash", Description = "Area attack with water", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 40 }, { Stat.PhysicalAttack, 40 }, { Stat.PhysicalDefense, 35 },
+                    { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 100 }, { Stat.Speed, 70 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 6,
                 Element = MonsterElement.Air,
-                Type = MonsterType.Beast,
+                Class = MonsterClass.Beast,
                 Name = "Griffin",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 11, Name = "Diving Attack", Description = "Attack from above", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 12, Name = "Slash", Description = "Slash from sharp claws", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 52 }, { Stat.PhysicalAttack, 90 }, { Stat.PhysicalDefense, 55 },
+                    { Stat.MagicAttack, 58 }, { Stat.MagicDefense, 62 }, { Stat.Speed, 60 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 7,
                 Element = MonsterElement.Fae,
-                Type = MonsterType.Humanoid,
+                Class = MonsterClass.Humanoid,
                 Name = "Changeling",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 13, Name = "Punch", Description = "Pow, biff, bam", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 14, Name = "Do Something", Description = "This skill does something", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
+                    { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 8,
                 Element = MonsterElement.Iron,
-                Type = MonsterType.Construct,
+                Class = MonsterClass.Construct,
                 Name = "Living Armor",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 15, Name = "Sword Strike", Description = "A quick slashing strike", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 16, Name = "Piercing Attack", Description = "Attack which pierces defenses", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
+                    { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 9,
                 Element = MonsterElement.Fire,
-                Type = MonsterType.Insect,
+                Class = MonsterClass.Insect,
                 Name = "Giant Fire Ant",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 17, Name = "Flame Blast", Description = "Attack with a blast of fire", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 18, Name = "Pinch", Description = "Attack with pinchers", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 55 }, { Stat.PhysicalAttack, 70 }, { Stat.PhysicalDefense, 45 },
+                    { Stat.MagicAttack, 70 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 60 } }
             });
-            kinds.Add(new MonsterKind()
+            types.Add(new MonsterType()
             {
                 Id = 10,
                 Element = MonsterElement.Fae,
-                Type = MonsterType.Monster,
+                Class = MonsterClass.Monster,
                 Name = "Ogre",
-                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 10 }, { Stat.PhysicalAttack, 2 }, { Stat.Speed, 2 } }
+                Skills = new List<Skill>() { new Skill() { Id = 19, Name = "Bash", Description = "Hit em with a club", AffectedStat=Stat.HpCurrent,
+                Amount = -10, Operator = Operator.Add, RelatedStat = Stat.PhysicalAttack },
+                new Skill() { Id = 20, Name = "Renegerate", Description = "Heal wounds and restore health", AffectedStat=Stat.PhysicalAttack,
+                Amount = 10, Operator = Operator.Add, RelatedStat = Stat.MagicAttack } },
+                BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
+                    { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
 
             monsters = new List<Monster>();
-            monsters.Add(new Monster() { Id = 1, Kind = kinds[3], UserId = 1 });
-            monsters.Add(new Monster() { Id = 2, Kind = kinds[7], UserId = 1 });
-            monsters.Add(new Monster() { Id = 3, Kind = kinds[9], UserId = 1 });
-            monsters.Add(new Monster() { Id = 4, Kind = kinds[2], UserId = 2 });
-            monsters.Add(new Monster() { Id = 5, Kind = kinds[4], UserId = 2 });
-            monsters.Add(new Monster() { Id = 6, Kind = kinds[3], UserId = 2 });
-            monsters.Add(new Monster() { Id = 7, Kind = kinds[8], UserId = 3 });
-            monsters.Add(new Monster() { Id = 8, Kind = kinds[8], UserId = 3 });
+            monsters.Add(new Monster() { Id = 1, Type = types[3], UserId = 1 });
+            monsters.Add(new Monster() { Id = 2, Type = types[7], UserId = 1 });
+            monsters.Add(new Monster() { Id = 3, Type = types[9], UserId = 1 });
+            monsters.Add(new Monster() { Id = 4, Type = types[2], UserId = 2 });
+            monsters.Add(new Monster() { Id = 5, Type = types[4], UserId = 2 });
+            monsters.Add(new Monster() { Id = 6, Type = types[3], UserId = 2 });
+            monsters.Add(new Monster() { Id = 7, Type = types[8], UserId = 3 });
+            monsters.Add(new Monster() { Id = 8, Type = types[8], UserId = 3 });
         }
 
-        public MonsterKind GetMonsterKind(int id)
+        public MonsterType GetMonsterKind(int id)
         {
-            return kinds.FirstOrDefault(kind => kind.Id == id);
+            return types.FirstOrDefault(kind => kind.Id == id);
         }
 
-        public IEnumerable<MonsterKind> GetMonsterKinds()
+        public IEnumerable<MonsterType> GetMonsterKinds()
         {
-            return (IEnumerable<MonsterKind>)kinds;
+            return (IEnumerable<MonsterType>)types;
         }
 
         public IEnumerable<Monster> GetUserMonsters(int userId)

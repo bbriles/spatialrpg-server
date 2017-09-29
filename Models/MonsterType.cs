@@ -6,17 +6,18 @@ using Newtonsoft.Json;
 
 namespace SpatialRPGServer.Models
 {
-    public class MonsterKind
+    public class MonsterType
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public string Class { get; set; }
         public string Element { get; set; }
+        public List<Skill> Skills { get; set; }
         [JsonIgnore]
         public Dictionary<string, int> BaseStats;
     }
 
-    public struct MonsterType
+    public struct MonsterClass
     {
         public const string Beast = "Beast";
         public const string Construct = "Construct";
