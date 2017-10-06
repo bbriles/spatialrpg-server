@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using SpatialRPGServer.Services;
+using SpatialRPGServer.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +27,13 @@ namespace SpatialRPGServer.Controllers
         public IActionResult GetBattleByUserId(int userId)
         {
             return Json(_battleService.GetBattleByUser(userId));
+        }
+
+        [HttpPost("{battleId}/actions")]
+        public IActionResult PostBattleActions(int battleId,[FromBody] IEnumerable<BattleAction> battleActions)
+        {
+
+            return Json("ok");
         }
     }
 }

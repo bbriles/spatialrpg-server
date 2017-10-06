@@ -11,6 +11,7 @@ namespace SpatialRPGServer.Models
         public int Id { get; }
         public User User { get; set; }
         public List<Monster> Enemies { get; set; }
+        public int EnemyIndexOffset; // offset expected for enemy index values
 
         public Battle(Encounter encounter, User user)
         {
@@ -18,6 +19,8 @@ namespace SpatialRPGServer.Models
 
             User = user;
             Enemies = new List<Monster>(encounter.Monsters);
+
+            EnemyIndexOffset = 100;
         }
     }
 }
