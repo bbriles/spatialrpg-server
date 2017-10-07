@@ -15,6 +15,11 @@ namespace SpatialRPGServer.Services
             battles = new List<Battle>();
         }
 
+        public Battle GetBattleById(int id)
+        {
+            return battles.FirstOrDefault(b => b.Id == id);
+        }
+
         public Battle GetBattleByUser(int userId)
         {
             return battles.FirstOrDefault(b => b.User.Id == userId);

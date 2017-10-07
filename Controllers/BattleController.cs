@@ -30,10 +30,21 @@ namespace SpatialRPGServer.Controllers
         }
 
         [HttpPost("{battleId}/actions")]
-        public IActionResult PostBattleActions(int battleId,[FromBody] IEnumerable<BattleAction> battleActions)
+        public IActionResult PostBattleActions(int battleId,[FromBody] List<BattleAction> battleActions)
         {
+            var battle = _battleService.GetBattleById(battleId);
 
-            return Json("ok");
+            if(battle != null && battleActions != null)
+            {
+                // check to make sure authenticated user is the user for this battle
+                // TODO: Validate authenticated user versus battle user
+
+                var result = battle.DoRound(battleActions);
+
+                return Json(result);
+            }
+            return BadRequest();
+            
         }
     }
 }

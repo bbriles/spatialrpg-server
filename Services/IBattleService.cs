@@ -8,6 +8,7 @@ namespace SpatialRPGServer.Services
 {
     public interface IBattleService
     {
+        Battle GetBattleById(int id);
         Battle GetBattleByUser(int userId);
         int StartBattle(Encounter encounter, User user);
         IEnumerable<Battle> GetBattles();

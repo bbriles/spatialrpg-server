@@ -11,16 +11,22 @@ namespace SpatialRPGServer.Models
         public int Id { get; }
         public User User { get; set; }
         public List<Monster> Enemies { get; set; }
-        public int EnemyIndexOffset; // offset expected for enemy index values
-
+        
         public Battle(Encounter encounter, User user)
         {
             Id = System.Threading.Interlocked.Increment(ref _nextId);
 
             User = user;
             Enemies = new List<Monster>(encounter.Monsters);
+        }
 
-            EnemyIndexOffset = 100;
+        public BattleRound DoRound(List<BattleAction> userActions)
+        {
+            var round = new BattleRound(User.Party.Monsters, Enemies, userActions);
+
+
+
+            return round;
         }
     }
 }
