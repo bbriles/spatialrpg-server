@@ -19,9 +19,14 @@ namespace SpatialRPGServer.Models
             {
                 _type = value;
                 Stats = new Stats(_type.BaseStats);
+                if (Name == null)
+                {
+                    Name = _type.Name;
+                }
             }
         }
         public int Id { get; set; }
+        public string Name { get; set; }
         public int UserId { get; set; }
         public Stats Stats { get; set; }
 
@@ -55,6 +60,25 @@ namespace SpatialRPGServer.Models
             // TODO: Add some AI here, probably a couple different kinds depending on the type of monster
 
             return action;
+        }
+
+        public BattleActionResult DoSkill(int skillId, Monster target)
+        {
+            var skill = Type.Skills.FirstOrDefault(s => s.Id == skillId);
+            if(skill != null)
+            {
+                if(skill.Type == SkillType.Attack)
+                {
+                    return Attack(skill, target);
+                }
+            }
+            return null;
+        }
+
+        protected BattleActionResult Attack(Skill skill, Monster target)
+        {
+
+            return null;
         }
     }
 }

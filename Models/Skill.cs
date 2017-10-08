@@ -10,15 +10,25 @@ namespace SpatialRPGServer.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Operator Operator { get; set; }
-        public string RelatedStat { get; set; }
         public string AffectedStat { get; set; }
-        public double Amount { get; set; }
+        public string RelatedStat { get; set; }
+        public int Power { get; set; }
+        public int Accuracy { get; set; }
+        public string Type { get; set; }
     }
 
-    public enum Operator
+    // Skill type determines what kind of formula is used
+    public struct SkillType
     {
-        Add = 0,
-        Multiply = 1
+        public const string Attack = "Attack";
+        public const string Restore = "Restore";
+    }
+
+    public struct TargetType
+    {
+        public const string Single = "Single";
+        public const string Group = "Group";
+        public const string All = "All";
+        public const string Self = "Self";
     }
 }
