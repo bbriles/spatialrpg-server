@@ -8,71 +8,71 @@ namespace SpatialRPGServer.Models
     public class BattleRound
     {
         public List<BattleTurn> Turns { get; set; }
+        protected Battle Battle;
+        protected List<BattleAction> UserActions;
+        protected List<BattleAction> EnemyActions;
 
-        public BattleRound(List<Monster> party, List<Monster> enemies, List<BattleAction> userActions)
+        public BattleRound(Battle battle, List<BattleAction> userActions)
         {
-            Turns = new List<BattleTurn>();
-
-            DoRound(party, enemies, userActions);
+            Battle = battle;
+           UserActions = userActions;
         }
 
-        protected void DoRound(List<Monster> party, List<Monster> enemies, List<BattleAction> userActions)
+        public List<BattleTurn> DoRound()
         {
-            var enemyActions = GetEnemyActions(enemies, party);
+            EnemyActions = GetEnemyActions();
+            Turns = CreateTurnList();
+            SortTurnList();
 
-            // Add user and enemy actions to turn list
-            for (var i = 0; i < party.Count; i++)
-            {
-                var action = userActions.FirstOrDefault(a => a.MonsterIndex == i);
-                if (action != null)
-                {
-                    Turns.Add(new BattleTurn(party[i], action));
-                }
-            }
-            for (var i = 0; i < enemies.Count; i++)
-            {
-                var action = enemyActions.FirstOrDefault(a => a.MonsterIndex == i);
-                if (action != null)
-                {
-                    Turns.Add(new BattleTurn(enemies[i], action));
-                }
-            }
-            // Sort turn list based on monster speed
-            // TODO: Sort turn list based on monster speed
-
-            // Determine results of actions
+            // Determine results of turns
             for (var i = 0; i < Turns.Count; i++)
             {
                 var action = Turns[i].Action;
-                Monster monster = null;
-                Monster target = null;
-                if (action.MonsterGroup == BattleGroup.Party)
-                {
-                    monster = party[action.MonsterIndex];
-                    target = enemies[action.TargetIndex];
-                }
-                else
-                {
-                    monster = enemies[action.MonsterIndex];
-                    target = party[action.TargetIndex];
-                }
-                // TODO: Handle skills other than single target
-                monster.DoSkill(action.SkillId, target);
+
+                Turns[i].Results = Turns[i].Monster.DoAction(action, Battle);
             }
 
-
+            return Turns;
         }
 
-        protected List<BattleAction> GetEnemyActions(List<Monster> enemies, List<Monster> party)
+        protected List<BattleAction> GetEnemyActions()
         {
             var actions = new List<BattleAction>();
 
-            for(var i = 0; i < enemies.Count; i++ )
+            foreach(var enemy in Battle.Enemies)
             {
-                actions.Add(enemies[i].GetBattleAction(i, enemies, party, BattleGroup.Enemies));
+                actions.Add(enemy.GetBattleAction(Battle));
             }
 
             return actions;
+        }
+
+        protected List<BattleTurn> CreateTurnList()
+        {
+            var turns = new List<BattleTurn>();
+            // Add user and enemy actions to turn list
+            foreach (var monster in Battle.User.Party.Monsters)
+            {
+                var action = UserActions.FirstOrDefault(a => a.MonsterBattleId == monster.BattleId);
+                if (action != null)
+                {
+                    turns.Add(new BattleTurn(monster, action));
+                }
+            }
+            foreach (var monster in Battle.Enemies)
+            {
+                var action = EnemyActions.FirstOrDefault(a => a.MonsterBattleId == monster.BattleId);
+                if (action != null)
+                {
+                    turns.Add(new BattleTurn(monster, action));
+                }
+            }
+            return turns;
+        }
+
+        protected void SortTurnList()
+        {
+            // TODO: Implement turn list sorting based on speed
         }
     }
 }

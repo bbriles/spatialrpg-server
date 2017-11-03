@@ -7,10 +7,9 @@ namespace SpatialRPGServer.Models
 {
     public class BattleAction
     {
-        public string MonsterGroup { get; set; }
-        public int MonsterIndex { get; set; }
+        public int MonsterBattleId { get; set; }
         public int SkillId { get; set; }
-        public int TargetIndex { get; set; }
+        public int TargetBattleId { get; set; }
         public string TargetGroup { get; set; }
     }
 

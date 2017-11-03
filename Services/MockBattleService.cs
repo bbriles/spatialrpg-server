@@ -32,6 +32,9 @@ namespace SpatialRPGServer.Services
 
         public int StartBattle(Encounter encounter, User user)
         {
+            // TODO: Validate given user vs logged in user
+            
+
             var battle = new Battle(encounter, user);
 
             battles.Add(battle);

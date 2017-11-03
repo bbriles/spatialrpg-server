@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace SpatialRPGServer.Models
 {
     public class Monster
     {
+        private readonly ILogger Logger = ApplicationLogging.CreateLogger<Monster>();
+
         private MonsterType _type;
         public MonsterType Type
         {
@@ -29,6 +32,7 @@ namespace SpatialRPGServer.Models
         public string Name { get; set; }
         public int UserId { get; set; }
         public Stats Stats { get; set; }
+        public int BattleId { get; set; } // ID of monster in a battle
 
         public Monster()
         {
@@ -39,44 +43,59 @@ namespace SpatialRPGServer.Models
             return Stats.GetStat(Stat.HpCurrent) > 0;
         }
 
-        public BattleAction GetBattleAction(int index, List<Monster> friendly, List<Monster> enemies, string myGroup)
+        public BattleAction GetBattleAction(Battle battle)
         {
-            var action = new BattleAction() { MonsterGroup = myGroup, MonsterIndex = index, SkillId = Type.Skills[0].Id };
-
-            if (myGroup == BattleGroup.Enemies)
-                action.TargetGroup = BattleGroup.Party;
-            else
-                action.TargetGroup = BattleGroup.Enemies;
-
-            for(var i = 0; i < enemies.Count; i++)
+            var targetBattleId = -1;
+            foreach(var monster in battle.User.Party.Monsters)
             {
-                if (enemies[i].IsAlive())
+                if(monster.IsAlive())
                 {
-                    action.TargetIndex = i;
+                    targetBattleId = monster.BattleId;
                     break;
                 }
             }
-
-            // TODO: Add some AI here, probably a couple different kinds depending on the type of monster
-
-            return action;
+            return new BattleAction()
+            { SkillId = Type.Skills[0].Id, MonsterBattleId = BattleId, TargetBattleId = targetBattleId, TargetGroup = null };
         }
 
-        public BattleActionResult DoSkill(int skillId, Monster target)
+        public List<BattleActionResult> DoAction(BattleAction action, Battle battle)
         {
-            var skill = Type.Skills.FirstOrDefault(s => s.Id == skillId);
-            if(skill != null)
+            var skill = Type.Skills.FirstOrDefault(s => s.Id == action.SkillId);
+
+            if (skill != null)
             {
-                if(skill.Type == SkillType.Attack)
+                var results = new List<BattleActionResult>();
+
+                // Determine target(s)
+                if (skill.TargetType == TargetType.Single || skill.TargetType == TargetType.Self)
                 {
-                    return Attack(skill, target);
+                    var target = battle.GetMonsterByBattleId(action.TargetBattleId);
+
+                    if (target != null)
+                    {
+                        return new List<BattleActionResult> { skill.DoSkillOnTarget(this, target) };
+                    }
+                    if(target == null)
+                    {
+                        Logger.LogError("Invalid Action Target", action);
+                        return null;
+                    }
+                }
+                else if (skill.TargetType == TargetType.Group)
+                {
+                    // TODO: Handle group targetting skills
+                }
+                else if (skill.TargetType == TargetType.All)
+                {
+                    // TODO: Handle all targetting skills
+                }
+                // Execute skill on each target
+
+                if (skill.Type == SkillType.Attack)
+                {
+                    //return new List<SkillResult> { Attack(skill, target) };
                 }
             }
-            return null;
-        }
-
-        protected BattleActionResult Attack(Skill skill, Monster target)
-        {
 
             return null;
         }

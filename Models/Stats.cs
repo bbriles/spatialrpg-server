@@ -64,6 +64,19 @@ namespace SpatialRPGServer.Models
             return statValue;
         }
 
+        public int AddToStat(string stat, int value)
+        {
+            try
+            {
+                return individualStats[stat] += value;
+            }
+            catch (KeyNotFoundException)
+            {
+                return -1;
+            }
+
+        }
+
         private void GenerateIndividualStats()
         {
             individualStats = new Dictionary<string, int>() {

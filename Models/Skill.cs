@@ -15,6 +15,34 @@ namespace SpatialRPGServer.Models
         public int Power { get; set; }
         public int Accuracy { get; set; }
         public string Type { get; set; }
+        public string TargetType { get; set; }
+
+        public BattleActionResult DoSkillOnTarget(Monster originMonster, Monster target)
+        {
+            if (Type == SkillType.Attack)
+            {
+                var damage = Attack(originMonster, target);
+
+                return new BattleActionResult() { MonsterBattleId = target.BattleId, Amount = damage, Type = BattleActionResultType.Damage };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected int Attack(Monster originMonster, Monster target)
+        {
+            int damage = 0;
+
+            // TODO: Do attack calculation here
+            damage = 10;
+
+            // Do damage to target
+            target.Stats.AddToStat(Stat.HpCurrent, -damage);
+
+            return damage;
+        }
     }
 
     // Skill type determines what kind of formula is used
