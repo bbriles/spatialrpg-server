@@ -26,9 +26,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Construct,
                 Name = "Magma Golem",
                 Skills = new List<Skill>() { new Skill() { Id = 1, Name = "Burninate", Description = "Burninate the countryside", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 2, Name = "Flame On", Description = "Increase attack power", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Accuracy = 100, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack }
+                Power = 40, Accuracy = 100, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Single }
             },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 39 }, { Stat.PhysicalAttack, 52 }, { Stat.PhysicalDefense, 43 },
                     { Stat.MagicAttack, 60 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 65 } }
@@ -40,9 +40,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Humanoid,
                 Name = "Dwarf",
                 Skills = new List<Skill>() { new Skill() { Id = 3, Name = "Axe Attack", Description = "Attack with axe", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 4, Name = "Natural Sprinter", Description = "Dwarves are very dangerous over short distances", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Self } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
                     { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
@@ -53,9 +53,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Dragon,
                 Name = "Leviathan",
                 Skills = new List<Skill>() { new Skill() { Id = 5, Name = "Water Blast", Description = "Attack with a blast of water", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 6, Name = "Shroud of Mist", Description = "Hide yourself in cover of mist", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Self } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 44 }, { Stat.PhysicalAttack, 48 }, { Stat.PhysicalDefense, 65 },
                     { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 64 }, { Stat.Speed, 43 } }
             });
@@ -66,9 +66,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Humanoid,
                 Name = "Sasquatch",
                 Skills = new List<Skill>() { new Skill() { Id = 7, Name = "Crushing blow", Description = "Attack with great power", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 8, Name = "Forest Camoflage", Description = "Hide yourself", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Self } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 63 }, { Stat.PhysicalAttack, 60 }, { Stat.PhysicalDefense, 55 },
                     { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 71 } }
             });
@@ -79,9 +79,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Spirit,
                 Name = "Undine",
                 Skills = new List<Skill>() { new Skill() { Id = 9, Name = "Flood", Description = "Lots of water", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Group },
                 new Skill() { Id = 10, Name = "Big Splash", Description = "Area attack with water", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.All } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 40 }, { Stat.PhysicalAttack, 40 }, { Stat.PhysicalDefense, 35 },
                     { Stat.MagicAttack, 50 }, { Stat.MagicDefense, 100 }, { Stat.Speed, 70 } }
             });
@@ -92,9 +92,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Beast,
                 Name = "Griffin",
                 Skills = new List<Skill>() { new Skill() { Id = 11, Name = "Diving Attack", Description = "Attack from above", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 12, Name = "Slash", Description = "Slash from sharp claws", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Single } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 52 }, { Stat.PhysicalAttack, 90 }, { Stat.PhysicalDefense, 55 },
                     { Stat.MagicAttack, 58 }, { Stat.MagicDefense, 62 }, { Stat.Speed, 60 } }
             });
@@ -105,9 +105,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Humanoid,
                 Name = "Changeling",
                 Skills = new List<Skill>() { new Skill() { Id = 13, Name = "Punch", Description = "Pow, biff, bam", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 14, Name = "Do Something", Description = "This skill does something", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Single } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
                     { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
@@ -118,9 +118,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Construct,
                 Name = "Living Armor",
                 Skills = new List<Skill>() { new Skill() { Id = 15, Name = "Sword Strike", Description = "A quick slashing strike", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 16, Name = "Piercing Attack", Description = "Attack which pierces defenses", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Single } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
                     { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });
@@ -131,9 +131,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Insect,
                 Name = "Giant Fire Ant",
                 Skills = new List<Skill>() { new Skill() { Id = 17, Name = "Flame Blast", Description = "Attack with a blast of fire", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 18, Name = "Pinch", Description = "Attack with pinchers", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Single } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 55 }, { Stat.PhysicalAttack, 70 }, { Stat.PhysicalDefense, 45 },
                     { Stat.MagicAttack, 70 }, { Stat.MagicDefense, 50 }, { Stat.Speed, 60 } }
             });
@@ -144,9 +144,9 @@ namespace SpatialRPGServer.Services
                 Class = MonsterClass.Monster,
                 Name = "Ogre",
                 Skills = new List<Skill>() { new Skill() { Id = 19, Name = "Bash", Description = "Hit em with a club", AffectedStat=Stat.HpCurrent,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.PhysicalAttack, TargetType = TargetType.Single },
                 new Skill() { Id = 20, Name = "Renegerate", Description = "Heal wounds and restore health", AffectedStat=Stat.PhysicalAttack,
-                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack } },
+                Power = 40, Type = SkillType.Attack, RelatedStat = Stat.MagicAttack, TargetType = TargetType.Self } },
                 BaseStats = new Dictionary<string, int>() { { Stat.HpMax, 45 }, { Stat.PhysicalAttack, 49 }, { Stat.PhysicalDefense, 49 },
                     { Stat.MagicAttack, 65 }, { Stat.MagicDefense, 65 }, { Stat.Speed, 45 } }
             });

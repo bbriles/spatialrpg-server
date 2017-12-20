@@ -89,6 +89,11 @@ namespace SpatialRPGServer.Models
                 {
                     // TODO: Handle all targetting skills
                 }
+                else
+                {
+                    Logger.LogError("Invalid Skill Target Type", skill);
+                    return null;
+                }
                 // Execute skill on each target
 
                 if (skill.Type == SkillType.Attack)

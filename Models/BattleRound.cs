@@ -25,11 +25,11 @@ namespace SpatialRPGServer.Models
             SortTurnList();
 
             // Determine results of turns
-            for (var i = 0; i < Turns.Count; i++)
+            foreach (var turn in Turns)
             {
-                var action = Turns[i].Action;
+                var action = turn.Action;
 
-                Turns[i].Results = Turns[i].Monster.DoAction(action, Battle);
+                turn.Results = turn.Monster.DoAction(action, Battle);
             }
 
             return Turns;
@@ -73,6 +73,10 @@ namespace SpatialRPGServer.Models
         protected void SortTurnList()
         {
             // TODO: Implement turn list sorting based on speed
+            for (var i = 0; i < Turns.Count; i++)
+            {
+                Turns[i].Order = i;
+            }
         }
     }
 }
